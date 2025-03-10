@@ -3,27 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download File</title>
+    <title>Download Files</title>
+    <style>
+        /* General Styles */
+        body {
+            background-color: #000; /* Black background */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Stylish Button */
+        .download-btn {
+            display: block;
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 12px 20px;
+            margin: 10px auto;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .download-btn:hover {
+            background-color: #ffcc00; /* Yellow hover effect */
+            color: black;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Download File</h2>
-    <button id="downloadBtn">Download</button>
+    <h2>Download Files</h2>
+    <div id="fileContainer"></div> <!-- Container for buttons -->
 
     <script>
-        document.getElementById("downloadBtn").addEventListener("click", function() {
-            const fileName = "aim.pdf";  // Change this to match your uploaded file
-            
-            // Construct relative URL (works only if served via GitHub Pages)
-            const fileUrl = `./${fileName}`;
+        // List of files stored in the same GitHub repo
+        const files = [
+            "file1.txt",
+            "aim.pdf",
+            "image.jpg",
+            "data.csv"
+        ];
 
-            // Create an invisible anchor tag for downloading
-            const a = document.createElement("a");
-            a.href = fileUrl;
-            a.download = fileName;  // Forces the file to download
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+        // Get the container
+        const container = document.getElementById("fileContainer");
+
+        files.forEach(fileName => {
+            // Create button for each file
+            const button = document.createElement("button");
+            button.textContent = `Download ${fileName}`;
+            button.classList.add("download-btn"); // Add styling class
+            
+            // Set up the download functionality
+            button.addEventListener("click", function() {
+                const fileUrl = `./${fileName}`; // Relative path to file
+                const a = document.createElement("a");
+                a.href = fileUrl;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+
+            // Add button to the container
+            container.appendChild(button);
         });
     </script>
 
