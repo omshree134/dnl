@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+</head>
+<body>
+
+    <h2>Download File</h2>
+    <button id="downloadBtn">Download</button>
+
+    <script>
+        document.getElementById("downloadBtn").addEventListener("click", function() {
+            const fileName = "aim.pdf";  // Change this to match your uploaded file
+            
+            // Construct relative URL (works only if served via GitHub Pages)
+            const fileUrl = `./${fileName}`;
+
+            // Create an invisible anchor tag for downloading
+            const a = document.createElement("a");
+            a.href = fileUrl;
+            a.download = fileName;  // Forces the file to download
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    </script>
+
+</body>
+</html>
